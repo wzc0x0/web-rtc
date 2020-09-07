@@ -1,1 +1,3 @@
-console.log(1);
+const start = async () => {
+  const stream = await navigator.mediaDevices.getUserMedia();
+};
