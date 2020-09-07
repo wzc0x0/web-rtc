@@ -1,0 +1,16 @@
+{
+  "name": "web-rtc",
+  "version": "1.0.0",
+  "description": "web rtc",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel serve ./src/index.html",
+    "build": "parcel build ./src/index.html"
+  },
+  "author": "wzc0x0@gmail.com",
+  "license": "MIT",
+  "browserslist": "> 0.2%",
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1"
+  }
+}
