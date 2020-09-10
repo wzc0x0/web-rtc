@@ -1,46 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
-      <button id="connectButton" name="connectButton" class="buttonleft">
-        Connect
-      </button>
-      <button
-        id="disconnectButton"
-        name="disconnectButton"
-        class="buttonright"
-        disabled
-      >
-        Disconnect
-      </button>
-      <div class="messagebox">
-        <label for="message"
-          >Enter a message:
-          <input
-            type="text"
-            name="message"
-            id="message"
-            placeholder="Message text"
-            inputmode="latin"
-            size="60"
-            maxlength="120"
-            disabled
-          />
-        </label>
-        <button id="sendButton" name="sendButton" class="buttonright" disabled>
-          Send
-        </button>
-      </div>
-      <div class="messagebox" id="receivebox">
-        <p>Messages received:</p>
-      </div>
-    </div>
-
-    <script src="./index.ts"></script>
+    <div id="app"></div>
+    <script src="./main.js"></script>
   </body>
 </html>

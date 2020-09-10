@@ -12,5 +12,9 @@
   "browserslist": "> 0.2%",
   "devDependencies": {
     "parcel": "^2.0.0-beta.1"
+  },
+  "dependencies": {
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.3"
   }
 }
