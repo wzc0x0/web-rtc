@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea cols="20" rows="10" id="desc" placeholder="desc"></textarea>
+    <textarea cols="20" rows="10" id="can" placeholder="can"></textarea>
+    <button id="connectButton">1.call</button>
+    <button id="start">2.connect</button>
+    <button id="send" disabled>3.send</button>
+    <p id="status"></p>
+  </body>
+  <script>
+    /*  const configuration = {
+             iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+         }; */
+  </script>
+  <script>
+    const connectButton = document.getElementById("connectButton");
+    const start = document.getElementById("start");
+    const descArea = document.getElementById("desc");
+    const canArea = document.getElementById("can");
+    const sendBtn = document.getElementById("send");
+    const statusCode = document.getElementById("status");
+    connectButton.addEventListener("click", initCall);
+    start.addEventListener("click", connectPeers);
+    sendBtn.addEventListener("click", sendMsg);
+
+    const pc = new RTCPeerConnection();
+    let channel;
+
+    pc.onicecandidate = (e) => {
+      statusCode.innerText = "ice生成";
+      if (e.candidate) {
+        console.log("candidate", JSON.stringify(e.candidate));
+        canArea.value = JSON.stringify(e.candidate);
+      }
+    };
+    pc.onnegotiationneeded = () => {
+      console.log("开始协商");
+      statusCode.innerText = "开始协商";
+      pc.createOffer().then((offer) => {
+        console.log("offer", JSON.stringify(offer));
+        return pc.setLocalDescription(offer);
+      });
+    };
+
+    function initCall() {
+      channel = pc.createDataChannel("msg");
+      statusCode.innerText = "通道打开中";
+      channel.onopen = () => {
+        console.log("msg open");
+        statusCode.innerText = "通道开启";
+        sendBtn.removeAttribute("disabled");
+      };
+      channel.onmessage = (e) => {
+        console.log("msg", e.data);
+      };
+      channel.onerror = () => {
+        //TODO 重连
+        statusCode.innerText = "通道关闭";
+      };
+    }
+
+    function connectPeers() {
+      pc.setRemoteDescription(
+        new RTCSessionDescription(JSON.parse(descArea.value))
+      );
+      pc.addIceCandidate(JSON.parse(canArea.value));
+    }
+
+    function sendMsg() {
+      channel.send(descArea.value);
+    }
+  </script>
+</html>

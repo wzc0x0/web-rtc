@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <textarea cols="20" rows="10" id="desc" placeholder="desc"></textarea>
+    <textarea cols="20" rows="10" id="can" placeholder="can"></textarea>
+    <button id="connect">connect</button>
+    <button id="send">send</button>
+  </body>
+  <script>
+    const client = document.getElementById("connect");
+    const send = document.getElementById("send");
+    let myChannel;
+    client.onclick = function () {
+      const desc = document.getElementById("desc").value;
+      const can = document.getElementById("can").value;
+      const pc = new RTCPeerConnection();
+      pc.setRemoteDescription(new RTCSessionDescription(JSON.parse(desc)));
+      pc.createAnswer().then((answer) => {
+        console.log("ans", JSON.stringify(answer));
+        pc.setLocalDescription(answer);
+      });
+      pc.addIceCandidate(JSON.parse(can));
+
+      pc.ondatachannel = ({ channel }) => {
+        channel.onmessage = (e) => {
+          myChannel = channel;
+          console.log("data:", e.data);
+        };
+      };
+    };
+
+    send.onclick = function () {
+      myChannel.send(document.getElementById("desc").value);
+    };
+  </script>
+</html>
