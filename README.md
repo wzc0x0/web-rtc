@@ -13,3 +13,9 @@ Start the dev server,
 ```bash
 $ yarn start
 ```
+
+Deploy to gitee.com,
+
+```bash
+$ ./deploy.sh
+```
