@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>
-        eruda.init();
-    </script> -->
-    <title></title>
+        if (location.search.indexOf("??_dev_tool") > -1) {
+            var devToolScript = document.createElement("script");
+            devToolScript.src = "//cdn.jsdelivr.net/npm/eruda"
+            document.head.append(devToolScript);
+            devToolScript.onload = function() {
+                eruda.init();
+            }
+        }
+    </script>
+    <title>File Transfer</title>
 </head>
 
 <body>
