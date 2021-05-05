@@ -6,9 +6,9 @@ import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 const pc = new RTCPeerConnection({
   iceServers: [
-    { urls: 'stun:stun.l.google.com:19302' },
-    { urls: 'stun:stun.ekiga.net' },
-    { urls: 'stun:stun.voxgratia.org' },
+    { urls: 'stun:stun.xten.com' },
+    { urls: 'stun:stun.ekiga.net:3478' },
+    { urls: 'stun:stun.voipbuster.com' },
   ],
 });
 let myChannel: RTCDataChannel;
