@@ -1,6 +1,8 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
+  title: 'File Transfer',
+  hash: true,
   theme: {
     '@primary-color': '#ffa940',
   },
